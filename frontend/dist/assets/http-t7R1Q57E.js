@@ -1,0 +1,1 @@
+import{a as e}from"./index-BRUzo0CX.js";import{t}from"./axios-DliI-G8g.js";var n=t.create({baseURL:``,timeout:18e4});n.interceptors.response.use(e=>e,t=>{let n=t.response?.data?.message||t.message||`请求失败，请检查后端服务`;return e.error(n),Promise.reject(t)});export{n as t};

@@ -1,0 +1,61 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: java-agent-code
+
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: false
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/java_agent_code
+    username: agent
+    password: agent123
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  ai:
+    openai:
+      api-key: ${SPRING_AI_OPENAI_API_KEY}
+      base-url: https://dashscope.aliyuncs.com/compatible-mode
+      chat:
+        options:
+          model: qwen-plus
+          temperature: 0.7
+      embedding:
+        options:
+          model: text-embedding-v2
+      connect-timeout: 30s
+      read-timeout: 120s
+
+agent:
+  max-steps: 12
+  tool-timeout-ms: 15000
+  rag-top-k: 6
+  require-approval-for-sensitive-tools: true
+  workspace-path: workspace
+  auto-commit: false
+
+milvus:
+  host: localhost
+  port: 19530
+  collection-name: java_agent_docs
+  embedding-dimension: 1536
