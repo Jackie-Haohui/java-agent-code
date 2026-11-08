@@ -2,6 +2,9 @@ server:
   port: 8080
 
 spring:
+  profiles:
+    active: local   # 加载 application-local.yml
+
   application:
     name: java-agent-code
 
@@ -11,8 +14,6 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/java_agent_code
-    username: agent
-    password: agent123
     driver-class-name: org.postgresql.Driver
 
   jpa:
@@ -34,7 +35,7 @@ spring:
 
   ai:
     openai:
-      api-key: ${SPRING_AI_OPENAI_API_KEY}
+      api-key: ${SPRING_AI_OPENAI_API_KEY}  # 这里用了系统环境变量，本身就很安全，保留即可
       base-url: https://dashscope.aliyuncs.com/compatible-mode
       chat:
         options:
